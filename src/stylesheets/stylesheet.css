@@ -1,0 +1,242 @@
+* {
+    box-sizing: border-box;
+    /*font-family: 'Mate SC', serif;*/
+    font-family: 'Roboto Slab', serif;
+  }
+  
+body {
+    background-color: rgb(218, 218, 218);
+    padding: 20px;
+    height: 100%;
+    min-height: 100%;
+    /*max-width: 1500px;*/
+    margin: auto;
+}
+
+
+#current_page {
+  font: bold;
+}
+
+.info_box_pic {
+  position: relative;
+}
+
+.info_box_pic_content {
+  position: absolute; /* Position the background text */
+  bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: rgb(218, 218, 218);
+  font-size:1.75vw;
+  width: 100%; /* Full width */
+  height: 6vw;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  
+}
+
+.info_box {
+  width: 90%;
+  background-color: rgb(218, 218, 218);
+  margin: auto;
+}
+
+.info_text {
+  font-size: 30px;
+  word-spacing: 7px;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+/* Slideshow container */
+.img-container {
+  text-align: center;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.title {
+  font-family: 'Cormorant SC', serif;
+  color: #a53163;
+  font: bold;
+  text-align: center;
+  font-size: 50px;
+  width: 100%;
+}
+
+.title_smaller {
+  font-family: 'Cormorant SC', serif;
+  color: #a53163;
+  text-align: left;
+  font-size: 50px;
+  width: 100%;
+}
+
+.linkref {
+  font: bold;
+  text-align: center;
+  font-size: 35px;
+  width: 100%;  
+}
+
+.linkref a {
+  text-decoration: none;
+}
+
+
+
+.seperater {
+  height: 50px;
+  width: 100%;
+}
+
+
+
+/*----------------------------*/
+/* Footer Styles              */
+/*----------------------------*/
+footer {
+  width: 100%;
+  background-color: #787b7e;
+  padding: 30px 0 15px 0;
+  margin-top: 40px;
+  color: #1a1a1a;
+}
+
+.ftop {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 20px 20px;
+  border-bottom: 1px solid #515355;
+}
+
+/* Base column structure */
+.fcol {
+  flex: 1 1 180px;
+  min-width: 160px;
+}
+
+.fcol h2 {
+  color: #9b2f5e;
+  font-family: 'Cormorant SC', serif;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 28px;
+}
+
+.fcol p {
+  margin: 8px 0;
+  line-height: 1.4;
+}
+
+.fspace {
+  padding-top: 43px; /* Aligns with column containing <h2> */
+}
+
+/* Link buttons column wrapper - Keeps line attached to buttons */
+.fnav-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch; /* Stretches .vl to full height of button container */
+  gap: 10px;
+  padding-top: 30px;
+  flex: 0 0 auto;
+}
+
+/* Vertical line - Will stretch dynamically alongside all buttons */
+.vl {
+  border-left: 2px solid #515355;
+  margin: 2px 0;
+  flex-shrink: 0;
+}
+
+/* Container holding the 2 button groups */
+.fnav-container {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  flex-wrap: wrap; /* Allows button columns to wrap cleanly */
+}
+
+.fnav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: flex-start;
+}
+
+.btn-footer {
+  display: inline-block;
+  color: black;
+  text-decoration: none;
+  border: 2px solid #363738;
+  border-radius: 43px;
+  padding: 7px 20px;
+  text-align: center;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-footer:hover {
+  background-color: #363738;
+  color: #ffffff;
+}
+
+.text-center {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+/* ------------------------------------
+   Responsive Mobile Adjustments (< 768px)
+------------------------------------ */
+@media screen and (max-width: 768px) {
+  .ftop {
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .fcol {
+    width: 100%;
+  }
+
+  .fspace {
+    padding-top: 0;
+  }
+
+  .vl {
+    display: none; /* Hide vertical line when stacked on phones */
+  }
+
+  .fnav-wrapper {
+    justify-content: center;
+    padding-top: 0;
+    width: 100%;
+  }
+
+  .fnav-container {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .fnav-group {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .btn-footer {
+    display: block;
+    width: 100%;
+  }
+}
