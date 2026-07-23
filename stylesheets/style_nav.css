@@ -1,0 +1,107 @@
+/* Base Navbar Styles */
+#navbar {
+    background-color: rgb(170, 170, 170);
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+#nav_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    position: relative; /* CRITICAL FIX: Allows absolute dropdown positioning */
+}
+
+#nav_content img {  
+    width: 100px;
+    height: auto;
+    display: block;
+    transition: width 0.3s ease;
+}
+
+/* Links Container (Desktop) */
+#nav_links {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+}
+
+#nav_links a {  
+    font-family: 'Cormorant SC', serif;
+    color: #b7356d;
+    text-decoration: none;
+    font-size: 28px;
+    padding: 10px 15px;
+    transition: color 0.2s ease, font-size 0.3s ease;
+}
+
+#nav_links a:hover {
+    color: #821f4a;
+}
+
+#current_page {
+    font-weight: bold;
+}
+
+/* Hamburger Icon (Hidden on Desktop) */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 36px;
+    color: #b7356d;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+/* ------------------------------------
+   Responsive Mobile View (< 768px)
+------------------------------------ */
+@media screen and (max-width: 768px) {
+    .hamburger {
+        display: block; /* Show menu icon */
+    }
+
+    #nav_links {
+        display: none; /* Hide desktop menu by default */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%; /* Sits directly under #nav_content */
+        left: 0;
+        background-color: rgb(170, 170, 170);
+        border-top: 1px solid #999;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        padding: 10px 0;
+        z-index: 1001;
+    }
+
+    /* Shown when active class is applied via JS */
+    #nav_links.active {
+        display: flex !important;
+    }
+
+    #nav_links a {
+        width: 100%;
+        text-align: center;
+        padding: 15px 0;
+        font-size: 24px;
+    }
+}
+
+/* ------------------------------------
+   Shrink effect when sticky/scrolled
+------------------------------------ */
+#navbar.scrolled #nav_content img {
+    width: 70px;
+}
+
+#navbar.scrolled #nav_links a {
+    font-size: 22px;
+}
