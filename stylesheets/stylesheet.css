@@ -92,6 +92,82 @@ body {
 }
 
 
+/*----------------------------*/
+/* Profile Header Layout      */
+/*----------------------------*/
+.dog-profile-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; /* Keeps image bottom-aligned with table on desktop */
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto 50px auto;
+  padding: 0 20px;
+}
+
+.profile-data {
+  flex: 1 1 55%;
+  width: 100%;
+}
+
+.profile-title {
+  font-family: 'Cormorant SC', serif;
+  color: #a53163;
+  text-align: center;
+  font-size: 40px;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.profile-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.profile-table td {
+  padding: 8px 12px;
+  font-size: 18px;
+}
+
+.profile-image-container {
+  flex: 1 1 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-img {
+  width: 100%;
+  max-width: 380px;
+  height: auto; /* Scales down fluidly without overlapping */
+  display: block;
+}
+
+/* ------------------------------------
+   Responsive Mobile Adjustments (< 768px)
+------------------------------------ */
+@media screen and (max-width: 768px) {
+  .dog-profile-header {
+    flex-direction: column-reverse; /* Places image on top of table on phones */
+    align-items: center;
+    gap: 20px;
+  }
+
+  .profile-data {
+    width: 100%;
+  }
+
+  .profile-table td {
+    font-size: 16px;
+    padding: 6px 8px;
+  }
+
+  .profile-img {
+    max-width: 280px; /* Comfortable size for phone screens */
+  }
+}
+
 
 /*----------------------------*/
 /* Footer Styles              */
