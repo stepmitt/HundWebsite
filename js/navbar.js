@@ -6,12 +6,13 @@ function initNavbarUtils(isSubpage) {
   const navLinks = document.getElementById("nav_links");
   const navbar = document.getElementById("navbar");
 
-  // 1. Fix relative link & image paths if sitting inside /pages/
-  if (isSubpage) {
-    const logo = document.getElementById("img_logo");
-    if (logo) logo.setAttribute("src", "../pic/Logo.png");
+  // 1. Fix relative link & image paths for both Subpages and Root Index
+  const logo = document.getElementById("img_logo");
+  const logoLink = document.querySelector(".logo-link");
 
-    const logoLink = document.querySelector(".logo-link");
+  if (isSubpage) {
+    // Inside /pages/ directory
+    if (logo) logo.setAttribute("src", "../pic/Logo.png");
     if (logoLink) logoLink.setAttribute("href", "../index.html");
 
     if (navLinks) {
@@ -27,6 +28,10 @@ function initNavbarUtils(isSubpage) {
         }
       });
     }
+  } else {
+    // On root page (index.html or domain root /)
+    if (logo) logo.setAttribute("src", "pic/Logo.png");
+    if (logoLink) logoLink.setAttribute("href", "index.html");
   }
 
   // 2. Set current active page identifier dynamically
@@ -36,12 +41,13 @@ function initNavbarUtils(isSubpage) {
 
     links.forEach((link) => {
       const linkPath = link.getAttribute("href");
-      if (
-        linkPath &&
-        (currentPath.endsWith(linkPath) ||
-          (currentPath === "/" && linkPath.includes("index.html")) ||
-          (currentPath.endsWith("/") && linkPath.includes("index.html")))
-      ) {
+      if (!linkPath) return;
+
+      // Extract filename safely to compare
+      const currentFile = currentPath.split("/").pop() || "index.html";
+      const targetFile = linkPath.split("/").pop();
+
+      if (currentFile === targetFile || (currentFile === "" && targetFile === "index.html")) {
         link.id = "current_page";
       }
     });
