@@ -1,14 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Determine relative folder depth
-  const isSubpage = window.location.pathname.includes("/pages/");
-  const basePath = isSubpage ? "../pages/" : "pages/";
+  // Detect if we are inside the /pages/ directory
+  const isSubpage = window.location.pathname.includes("/pages/")
+  console.log(isSubpage)
 
-  // 1. Helper function to load HTML components
+  // Footer and Navbar are loaded relative to current depth
+  const componentPath = isSubpage ? "../pages/" : "pages/"
+  console.log(componentPath);
+
   const loadComponent = (elementId, fileName, callback) => {
     const container = document.getElementById(elementId);
     if (!container) return;
 
-    fetch(basePath + fileName)
+    fetch(componentPath + fileName)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Failed to load ${fileName}: ${response.status}`);
@@ -17,29 +20,65 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .then((html) => {
         container.innerHTML = html;
-        // Run callback ONLY AFTER HTML is injected into DOM
         if (callback) callback();
       })
       .catch((err) => console.error("Error loading component:", err));
   };
 
-  // 2. Load Footer
-  loadComponent("footer-container", "footer.html");
+  // 1. Load Footer
+  loadComponent("footer-container", "footer.html", () => {
+    // Fix footer links if on subpage
+    if (isSubpage) {
+      const footer = document.getElementById("footer-container");
+      footer.querySelectorAll("a").forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href && href.includes("/pages/")) {
+          // Change /src/pages/X.html or /pages/X.html to X.html
+          const pageName = href.split("/").pop();
+          link.setAttribute("href", pageName);
+        }
+      });
+    }
+  });
 
-  // 3. Load Navbar and attach Hamburger Event Listener AFTER loading finishes
+  // 2. Load Navbar
   loadComponent("navbar-container", "navbar.html", () => {
     const hamburgerBtn = document.getElementById("hamburger_btn");
     const navLinks = document.getElementById("nav_links");
     const navbar = document.getElementById("navbar");
 
-    // Hamburger Toggle Click Event
+    // --- FIX PATHS FOR SUBPAGES ---
+    if (isSubpage) {
+      // Fix logo image and logo link
+      const logo = document.getElementById("img_logo");
+      if (logo) logo.setAttribute("src", "../pic/Logo.png");
+
+      const logoLink = document.querySelector(".logo-link");
+      if (logoLink) logoLink.setAttribute("href", "../index.html");
+
+      // Fix links in the nav menu
+      if (navLinks) {
+        navLinks.querySelectorAll("a").forEach((link) => {
+          const href = link.getAttribute("href");
+          
+          if (href === "index.html") {
+            // Point back to root index
+            link.setAttribute("href", "../index.html");
+          } else if (href && href.startsWith("pages/")) {
+            // Change "pages/tara.html" to "tara.html"
+            link.setAttribute("href", href.replace("pages/", ""));
+          }
+        });
+      }
+    }
+
+    // --- HAMBURGER MENU & SCROLL EVENTS ---
     if (hamburgerBtn && navLinks) {
       hamburgerBtn.addEventListener("click", (e) => {
-        e.stopPropagation(); // Prevents instant closing
+        e.stopPropagation();
         navLinks.classList.toggle("active");
       });
 
-      // Close menu when clicking a link inside it
       navLinks.querySelectorAll("a").forEach((link) => {
         link.addEventListener("click", () => {
           navLinks.classList.remove("active");
@@ -47,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // Shrink navbar effect on scroll
     if (navbar) {
       window.addEventListener("scroll", () => {
         if (window.scrollY > 50) {
