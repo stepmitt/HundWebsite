@@ -47,9 +47,50 @@ function initApp() {
   });
 }
 
+function loadUrkundeLightBox(){
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const closeBtn = document.querySelector(".lightbox-close");
+
+  // Select all images in your grids & document tables
+  const images = document.querySelectorAll(".doc-table img, .aligned-column img, .row img");
+
+  // Attach click listener to every image
+  images.forEach(img => {
+    img.addEventListener("click", function () {
+      lightbox.style.display = "flex";
+      lightboxImg.src = this.src;
+      lightboxImg.alt = this.alt;
+    });
+  });
+
+  // Close lightbox when clicking the '×' button
+  closeBtn.addEventListener("click", closeLightbox);
+
+  // Close lightbox when clicking anywhere on the dark background
+  lightbox.addEventListener("click", function (e) {
+    if (e.target !== lightboxImg) {
+      closeLightbox();
+    }
+  });
+
+  // Close lightbox on 'Escape' key press
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && lightbox.style.display === "flex") {
+      closeLightbox();
+    }
+  });
+
+  function closeLightbox() {
+    lightbox.style.display = "none";
+  }
+}
+
 // Safe Initialization Check
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initApp);
+  document.addEventListener("DOMContentLoaded", loadUrkundeLightBox);
 } else {
   initApp();
+  loadUrkundeLightBox();
 }
