@@ -22,31 +22,210 @@ body {
   position: relative;
 }
 
-.info_box_pic_content {
-  position: absolute; /* Position the background text */
-  bottom: 0; /* At the bottom. Use top:0 to append it to the top */
-  background: rgb(0, 0, 0); /* Fallback color */
-  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
-  color: rgb(218, 218, 218);
-  font-size:1.75vw;
-  width: 100%; /* Full width */
-  height: 6vw;
-  margin-bottom: 5px;
-  padding-left: 10px;
-  
-}
+/*.info_box {
+  width: 90%;
+  background-color: rgb(218, 218, 218);
+  margin: auto;
+}*/
 
 .info_box {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start; /* Keeps image at top; change to 'center' to vertically balance */
+  gap: 20px; /* Space between image and text */
   width: 90%;
   background-color: rgb(218, 218, 218);
   margin: auto;
 }
 
+.info_img {
+  flex: 0 0 25%; /* Keeps image at 25% container width */
+  max-width: 350px;
+  min-width: 150px;
+  height: auto;
+}
+
+.info_content {
+  flex: 1; /* Takes up all remaining horizontal space */
+}
+
 .info_text {
-  font-size: 30px;
-  word-spacing: 7px;
-  line-height: 1.5;
+  /* Fluid font size: Minimum 18px, ideal 2.5vw, maximum 30px */
+  font-size: clamp(1.125rem, 2.5vw, 1.875rem); 
+  
+  /* Relative word-spacing scales down nicely with font size */
+  word-spacing: 0.25em; 
+  line-height: 1.6;
   text-align: justify;
+  margin-top: -0.4em;
+  
+  /* Prevents single words from breaking container bounds on narrow screens */
+  overflow-wrap: break-word; 
+  hyphens: auto;
+}
+
+/* Tablet & Mobile Adjustments */
+@media screen and (max-width: 768px) {
+  .info_text {
+    /* Avoid 'text-align: justify' on small screens to prevent huge spaces/rivers */
+    text-align: left; 
+    word-spacing: normal;
+  }
+}
+
+/* Container layout */
+.about-box {
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/* Image float styling */
+.about-img {
+  float: left;
+  width: 42%;
+  max-width: 550px;
+  min-width: 250px;
+  height: auto;
+  margin-right: 25px;
+  object-fit: cover;
+}
+
+/* Responsive typography & text spacing */
+.about-text {
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem); /* Fluid font size: ~17px on mobile to 20px on desktop */
+  line-height: 1.75;
+  color: #2c2c2c;
+  text-align: justify;
+  hyphens: auto;
+  margin-top: -0.5em;
+}
+
+.about-text p {
+  margin-bottom: 18px;
+  margin-top: 0;
+}
+
+.about-signature {
+  font-weight: bold;
+  margin-top: 25px;
+}
+
+/* Clear float afterwards */
+.about-box::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* ------------------------------------
+   Responsive Adjustments (< 600px)
+------------------------------------ */
+@media screen and (max-width: 600px) {
+  .about-img {
+    float: none; /* Disables float on small phones */
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto 20px auto; /* Centers image above text */
+  }
+
+  .about-text {
+    text-align: left; /* Left-aligned text prevents wide gaps between words on narrow screens */
+    line-height: 1.6;
+  }
+}
+
+.links-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Side-by-side layout on desktop */
+.tables-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%;
+}
+
+.links-table {
+  flex: 1;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.links-table td {
+  padding: 8px 10px;
+  vertical-align: top;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+}
+
+.links-table td.big {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.links-table a {
+  color: black;
+  text-decoration: none;
+  word-break: break-all; /* Prevents long URLs from breaking the screen width */
+}
+
+.links-table a:hover {
+  text-decoration: underline;
+}
+
+/* ------------------------------------
+   Responsive Adjustments (< 768px)
+------------------------------------ */
+@media screen and (max-width: 768px) {
+  .tables-wrapper {
+    flex-direction: column; /* Stacks tables on top of each other on mobile */
+    gap: 25px;
+  }
+}
+
+/* Container sizing and centering */
+.legal-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Base typography for legal texts */
+.legal-content {
+  font-size: clamp(1rem, 2vw, 1.25rem); /* Fluid scaling between 16px and 20px */
+  line-height: 1.7;
+  color: #2c2c2c;
+  text-align: left;
+}
+
+/* Headings inside legal pages */
+.legal-content ul {
+  margin-bottom: 20px;
+  padding-left: 25px;
+}
+
+/* Link styling */
+.legal-content a {
+  text-decoration: none;
+  color: black;
+  word-break: break-all; /* Prevents long URLs from overflowing phone screens */
+}
+
+/* Phone screen adjustments */
+@media screen and (max-width: 600px) {
+  .legal-container {
+    padding: 10px;
+  }
+  
+  .legal-content {
+    line-height: 1.6;
+  }
 }
 
 /* Slideshow container */
@@ -59,17 +238,20 @@ body {
 .title {
   font-family: 'Cormorant SC', serif;
   color: #a53163;
-  font: bold;
+  font-weight: bold;
   text-align: center;
-  font-size: 50px;
   width: 100%;
+  
+  /* Fluid font size: Minimum 28px on mobile, ideal 5vw on tablets, maximum 50px on desktop */
+  font-size: clamp(1.75rem, 5vw, 3.125rem);
 }
 
 .title_smaller {
   font-family: 'Cormorant SC', serif;
   color: #a53163;
   text-align: left;
-  font-size: 50px;
+  /* Fluid font size: Minimum 28px on mobile, ideal 4vw on tablets, maximum 40px on desktop */
+  font-size: clamp(1.75rem, 4vw, 40px);
   width: 100%;
 }
 
@@ -115,7 +297,8 @@ body {
   font-family: 'Cormorant SC', serif;
   color: #a53163;
   text-align: center;
-  font-size: 40px;
+  /* Fluid font size: Minimum 28px on mobile, ideal 4vw on tablets, maximum 40px on desktop */
+  font-size: clamp(1.75rem, 4vw, 40px);
   margin-top: 0;
   margin-bottom: 20px;
 }
@@ -204,12 +387,13 @@ footer {
   font-family: 'Cormorant SC', serif;
   margin-top: 0;
   margin-bottom: 15px;
-  font-size: 28px;
+  font-size: clamp(1.4rem, 2.5vw, 1.75rem);
 }
 
 .fcol p {
   margin: 8px 0;
   line-height: 1.4;
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
 }
 
 .fspace {
@@ -258,6 +442,7 @@ footer {
   text-align: center;
   transition: all 0.2s ease;
   white-space: nowrap;
+  font-size: 0.95rem;
 }
 
 .btn-footer:hover {
@@ -269,6 +454,7 @@ footer {
   text-align: center;
   margin-top: 20px;
   font-size: 14px;
+  opacity: 0.85;
 }
 
 /* ------------------------------------
