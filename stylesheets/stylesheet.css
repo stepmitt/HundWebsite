@@ -282,15 +282,13 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center; /* Keeps image bottom-aligned with table on desktop */
-  gap: 30px;
   max-width: 1200px;
   margin: 0 auto 50px auto;
-  padding: 0 20px;
 }
 
 .profile-data {
-  flex: 1 1 55%;
-  width: 100%;
+  flex: 1 1 45%;
+  max-width: 60%;
 }
 
 .profile-title {
@@ -304,17 +302,19 @@ body {
 }
 
 .profile-table {
-  width: 100%;
+  width: 90%;
+  max-width: 600px;
   border-collapse: collapse;
 }
 
 .profile-table td {
   padding: 8px 12px;
   font-size: 18px;
+  font-size: clamp(14px, 1.8vw, 1.25rem); /* Fluid font size: 14px on mobile to 20px on desktop */
 }
 
 .profile-image-container {
-  flex: 1 1 40%;
+  flex: 1 1 20%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -339,6 +339,11 @@ body {
 
   .profile-data {
     width: 100%;
+    max-width: 100%;
+  }
+
+  .profile-table {
+    margin-left: auto;
   }
 
   .profile-table td {
