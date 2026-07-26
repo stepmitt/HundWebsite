@@ -258,7 +258,7 @@ body {
 .linkref {
   font: bold;
   text-align: center;
-  font-size: 35px;
+  font-size: clamp(20px, 3vw, 35px);
   width: 100%;  
 }
 
