@@ -356,6 +356,60 @@ body {
   }
 }
 
+.doc-table-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px;
+  overflow-x: auto; /* Ensures table remains scrollable if screen gets extremely small */
+}
+
+.doc-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 12px; /* Uniform spacing between document blocks */
+  border: none;
+}
+
+/* Header Titles (spanning 2 images) */
+.doc-table th {
+  background-color: #f4f4f4;
+  color: #a53163;
+  font-family: 'Cormorant SC', serif;
+  font-size: 1.25rem;
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px;
+}
+
+/* Image cells */
+.doc-table td {
+  width: 25%; /* 4 columns total = 25% each */
+  vertical-align: top;
+  text-align: center;
+}
+
+.doc-table td img {
+  width: 100%;
+  height: auto; /* Preserves aspect ratio */
+  display: block;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Responsive adjustment for phones */
+@media screen and (max-width: 600px) {
+  .doc-table {
+    border-spacing: 6px;
+  }
+  
+  .doc-table th {
+    font-size: 1rem;
+    padding: 6px;
+  }
+}
+
 
 /*----------------------------*/
 /* Footer Styles              */
@@ -506,4 +560,62 @@ footer {
     display: block;
     width: 100%;
   }
+}
+
+/* Lightbox Background Overlay */
+.lightbox {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 9999; /* Sit on top of everything */
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85); /* Dark semi-transparent backdrop */
+  backdrop-filter: blur(4px); /* Optional modern background blur */
+  justify-content: center;
+  align-items: center;
+  cursor: zoom-out;
+}
+
+/* Enlarged Image */
+.lightbox-content {
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  cursor: default;
+  
+  /* Smooth scale-in animation */
+  animation: zoomIn 0.25s ease-out;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Close Button (×) */
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+}
+
+.lightbox-close:hover {
+  color: #a53163;
+}
+
+/* Cursor indicator on gallery images */
+.doc-table img,
+.aligned-column img,
+.row img {
+  cursor: zoom-in;
 }
