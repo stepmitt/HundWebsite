@@ -13,11 +13,6 @@ body {
     margin: auto;
 }
 
-
-#current_page {
-  font: bold;
-}
-
 .info_box_pic {
   position: relative;
 }
@@ -322,7 +317,7 @@ body {
 
 .profile-img {
   width: 100%;
-  max-width: 380px;
+  max-width: 580px;
   height: auto; /* Scales down fluidly without overlapping */
   display: block;
 }
@@ -352,7 +347,7 @@ body {
   }
 
   .profile-img {
-    max-width: 280px; /* Comfortable size for phone screens */
+    max-width: 480px; /* Comfortable size for phone screens */
   }
 }
 

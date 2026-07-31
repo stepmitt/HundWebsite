@@ -32,6 +32,10 @@
     gap: 2em;
 }
 
+#nav_links a#current_page {
+    font-weight: 700;
+}
+
 #nav_links a {  
     font-family: 'Cormorant SC', serif;
     color: #b7356d;
@@ -43,10 +47,6 @@
 
 #nav_links a:hover {
     color: #821f4a;
-}
-
-#current_page {
-    font-weight: bold;
 }
 
 /* Hamburger Icon (Hidden on Desktop) */
