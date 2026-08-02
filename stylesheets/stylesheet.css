@@ -225,9 +225,15 @@ body {
 
 /* Slideshow container */
 .img-container {
+  width: 100%;
+  max-width: 800px;
+  margin: auto; /* Anchors the image block at the bottom */
   text-align: center;
-  max-width: 1000px;
-  margin: auto;
+}
+
+.img-container img {
+  width: 60%;
+  height: auto;
 }
 
 .title {
@@ -237,8 +243,8 @@ body {
   text-align: center;
   width: 100%;
   
-  /* Fluid font size: Minimum 28px on mobile, ideal 5vw on tablets, maximum 50px on desktop */
-  font-size: clamp(1.75rem, 5vw, 3.125rem);
+  font-size: clamp(1.5rem, 3.5vw, 2.75rem); /* Scaled down slightly to fit headers cleanly */
+  margin-bottom: 20px;
 }
 
 .title_smaller {
@@ -248,6 +254,37 @@ body {
   /* Fluid font size: Minimum 28px on mobile, ideal 4vw on tablets, maximum 40px on desktop */
   font-size: clamp(1.75rem, 4vw, 40px);
   width: 100%;
+}
+
+/* Parent Flex Container */
+.dogs-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch; /* Forces both cards to equal height */
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/* Individual Dog Card */
+.dog-card {
+  flex: 1; /* Both cards take up 50% equal width */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Pushes img-container to the bottom */
+  text-align: center;
+}
+/* ------------------------------------
+   Responsive Adjustments (< 768px)
+------------------------------------ */
+@media screen and (max-width: 768px) {
+  .dogs-wrapper {
+    flex-direction: column; /* Stacks the cards vertically on smaller devices */
+    gap: 40px;
+  }
 }
 
 .linkref {
