@@ -17,12 +17,6 @@ body {
   position: relative;
 }
 
-/*.info_box {
-  width: 90%;
-  background-color: rgb(218, 218, 218);
-  margin: auto;
-}*/
-
 .info_box {
   display: flex;
   flex-direction: row;
@@ -33,32 +27,53 @@ body {
   margin: auto;
 }
 
+.info_box2 {
+  display: grid;
+  grid-template-columns: minmax(150px, 30%) 1fr; /* Image takes 25% (min 150px), text takes remaining space */
+  gap: 20px;
+  width: 90%;
+  max-width: 1200px; /* Prevents container from over-expanding on wide screens */
+  background-color: rgb(218, 218, 218);
+  margin: auto;
+}
+
 .info_img {
-  flex: 0 0 25%; /* Keeps image at 25% container width */
-  max-width: 350px;
-  min-width: 150px;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Keeps image full-height without stretching proportions */
+  display: block;
 }
 
 .info_content {
-  flex: 1; /* Takes up all remaining horizontal space */
+  display: flex;
+  align-items: center; /* Vertically centers text if container expands */
+  padding: 15px 15px 15px 0;
 }
 
 .info_text {
-  /* Fluid font size: Minimum 18px, ideal 2.5vw, maximum 30px */
-  font-size: clamp(1.125rem, 2.5vw, 1.875rem); 
-  
-  /* Relative word-spacing scales down nicely with font size */
-  word-spacing: 0.25em; 
+  font-size: clamp(1rem, 2vw, 1.5rem); /* Scalable font size */
   line-height: 1.6;
   text-align: justify;
-  margin-top: -0.4em;
-  
-  /* Prevents single words from breaking container bounds on narrow screens */
-  overflow-wrap: break-word; 
+  margin: 0;
+  overflow-wrap: break-word;
   hyphens: auto;
 }
 
+/* Mobile Responsiveness: Stacks cleanly on smaller screens */
+@media (max-width: 768px) {
+  .info_box2 {
+    grid-template-columns: 1fr; /* Switch to single column */
+  }
+
+  .info_img {
+    width: 80%;
+    margin: auto;
+  }
+
+  .info_content {
+    padding: 15px;
+  }
+}
 /* Tablet & Mobile Adjustments */
 @media screen and (max-width: 768px) {
   .info_text {
@@ -223,7 +238,6 @@ body {
   }
 }
 
-/* Slideshow container */
 .img-container {
   width: 100%;
   max-width: 800px;
@@ -234,6 +248,41 @@ body {
 .img-container img {
   width: 60%;
   height: auto;
+} 
+
+.img-container2 {
+  width: 100%; 
+  max-width: 800px; 
+  margin: auto; 
+  text-align: center; 
+}
+
+/* Der Wrapper passt sich exakt der Bildgröße an */
+.img-wrapper {
+  position: relative; 
+  display: inline-block; 
+  width: 80%; /* Passt die Breite des Bild-Containers an */
+}
+
+.img-wrapper img { 
+  width: 100%; 
+  height: auto; 
+  display: block; 
+} 
+
+/* Positionierung des AI-Hinweises unten rechts */
+.ai-badge {
+  position: absolute;
+  bottom: clamp(4px, 1.5vw, 10px);
+  right: clamp(4px, 1.5vw, 10px);
+  background-color: rgba(0, 0, 0, 0.65);
+  color: #ffffff;
+  padding: 0.3em 0.6em;
+  font-size: clamp(0.45rem, 1.5vw, 0.8rem);
+  border-radius: 4px;
+  font-family: sans-serif;
+  pointer-events: none;
+  white-space: nowrap; /* Prevents text wrapping on small screens */
 }
 
 .title {
